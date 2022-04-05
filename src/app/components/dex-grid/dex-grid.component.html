@@ -1,0 +1,23 @@
+<div class="card-grid">
+  <div
+    class="box"
+    *ngFor="
+      let item of apiData
+        | paginate
+          : { itemsPerPage: limit, currentPage: page, totalItems: totalNumber }
+    "
+  >
+    <img src="{{ item.sprites.front_default }}" alt="" />
+    <h3>{{ item.name }}</h3>
+    <p>
+      <b>{{ item.id }}</b>
+    </p>
+    <p>
+      <b>{{ item.types[0].type.name }}</b>
+      <b *ngIf="item.types.length > 1"> / {{ item.types[1].type.name }}</b>
+    </p>
+  </div>
+</div>
+<pagination-controls
+  (pageChange)="page = $event; apiData = []; getData()"
+></pagination-controls>
