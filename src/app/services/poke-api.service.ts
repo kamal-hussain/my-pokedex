@@ -11,7 +11,7 @@ export class PokeApiService {
   url = 'https://pokeapi.co/api/v2/pokemon';
 
   getData(limit: number, offset: number): Observable<any> {
-    console.log(this.url + '?limit=' + limit + '&offset=' + offset);
+    // console.log(this.url + '?limit=' + limit + '&offset=' + offset);
     return this.http.get(this.url + '?limit=' + limit + '&offset=' + offset);
   }
 

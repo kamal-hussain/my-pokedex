@@ -11,7 +11,7 @@ export class DexGridComponent implements OnInit {
   pokemon: any = [];
   page: number = 1;
   totalNumber: any;
-  limit: number = 50;
+  limit: number = 30;
 
   constructor(private apiCall: PokeApiService) {}
 
@@ -31,9 +31,6 @@ export class DexGridComponent implements OnInit {
             this.pokemon.push(data);
 
             this.pokemon.sort((a: any, b: any) => a.id - b.id);
-
-            console.log(result);
-            console.log(data);
           });
         });
       });

@@ -1,6 +1,7 @@
 
 .header {
   overflow: hidden;
+  padding: 0;
   top: 0;
   position: sticky;
   margin-top: 16px;
@@ -10,11 +11,11 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 20px;
   text-align: center;
-  background-color: rgb(235, 28, 28);
+  background-color: #eb1c1c;
   color: #ffff;
   z-index: 1000;
-  max-width: 100%;
-  min-width: 200px;
+  width: 100%;
+  min-width: 150px;
   font-family: "Press Start 2P", cursive;
   text-shadow: 2px 2px black;
 
