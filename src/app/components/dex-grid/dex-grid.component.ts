@@ -6,12 +6,13 @@ import { PokeApiService } from 'src/app/services/poke-api.service';
   styleUrls: ['./dex-grid.component.scss'],
 })
 export class DexGridComponent implements OnInit {
-  title = 'my-app';
-  apiData: any = [];
+  title = 'Pokedex';
+  pokeData: any;
+  pokemon: any = [];
   page: number = 1;
   totalNumber: any;
-  limit: number = 10;
-  typeCount: number = 1;
+  limit: number = 50;
+
   constructor(private apiCall: PokeApiService) {}
 
   ngOnInit() {
@@ -26,10 +27,12 @@ export class DexGridComponent implements OnInit {
 
         data.results.forEach((result: any) => {
           this.apiCall.getMoreData(result.name).subscribe((data: any) => {
-            this.apiData.push(data);
-            this.apiData.sort((a: any, b: any) => a.id - b.id);
-            // this.typeCount = this.apiData.filter(data.types[].type).length;
-            //  console.log(result)
+            this.pokeData = data;
+            this.pokemon.push(data);
+
+            this.pokemon.sort((a: any, b: any) => a.id - b.id);
+
+            console.log(result);
             console.log(data);
           });
         });

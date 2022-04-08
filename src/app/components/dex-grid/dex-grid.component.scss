@@ -1,34 +1,97 @@
+
 .card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5em;
+  margin: 15px 0px;
+  width: 100%;
+
+  .box {
+    max-width: 200px;
+    min-width: 200px;
+    height: auto;
+    margin-top: 5px;
+    padding: 5px;
+    border: solid 1px black;
+    border-radius: 5%;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    flex-grow: 1;
+    flex-basis: 18%;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.5em;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #323a49;
+    color: #fff;
+    text-shadow: 2px 2px black;
+    font-family: "Press Start 2P", cursive;
+    text-transform: capitalize;
+    text-align: center;
 
-    .box {
-        max-width: 28%;
+    .default {
+      position: relative;
+      width: 100%;
+      svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        width: 100%;
         height: auto;
-        margin-top: 5px;
-        padding: 5px;
-        border: solid 1px black;
-        border-radius: 5%;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
-        flex-grow: 1;
-        flex-basis: 18%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        img {
-            // max-width: 100px;
-            width: 100%;
-            display: block;
-            margin: auto;
-        }
+        // path {
+        //   fill: $water;
+        // }
+      }
+      img {
+        width: 100%;
+        margin: auto;
+      }
     }
+
+    span {
+      font-size: 12px;
+    }
+
+  }
 }
 
-pagination-controls {
-    text-align: center;
+.poke-paginate {
+  margin-bottom: 0 !important;
+  text-align: center;
+  li {
+    margin-right: -1px !important;
+    a {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  li.current {
+    background-color: #007bff !important;
+    border: 1px solid #007bff !important;
+    padding: 6px 12px !important;
+    z-index: 999999 !important;
+    position: relative;
+  }
+  a {
+    color: #007bff !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 6px 12px !important;
+  }
+  button {
+    color: #007bff !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 6px 12px !important;
+  }
+  .disabled {
+    color: #6c757d !important;
+    pointer-events: none !important;
+    cursor: auto !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 6px 12px !important;
+  }
 }

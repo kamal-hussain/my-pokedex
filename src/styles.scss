@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/styles/_poke-type-colors";
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+html {
+    margin: 0px 90px;
+    align-items: center;
+    background-color: rgb(108, 28, 28)
+}
+
+body {
+    margin: 0 auto;
+}
