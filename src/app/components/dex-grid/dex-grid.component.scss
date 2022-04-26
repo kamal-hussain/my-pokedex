@@ -16,15 +16,12 @@
     border: solid 1px black;
     border-radius: 5%;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-    flex-grow: 1;
-    flex-basis: 18%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #323a49;
     color: #fff;
     text-shadow: 2px 2px black;
-    font-family: "Press Start 2P", cursive;
     text-transform: capitalize;
     text-align: center;
 
@@ -35,7 +32,6 @@
         position: absolute;
         left: 0;
         top: 0;
-        z-index: 0;
         width: 100%;
         height: auto;
         // path {

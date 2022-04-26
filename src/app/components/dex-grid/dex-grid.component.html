@@ -7,7 +7,7 @@
           : { itemsPerPage: limit, currentPage: page, totalItems: totalNumber }
     "
   >
-    <div class="default {{ item.types[0].type.name }}">
+    <div class="default">
       <svg
         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -28,35 +28,67 @@
         inkscape:output_extension="org.inkscape.output.svg.inkscape"
         inkscape:version="0.45"
         sodipodi:docbase="/home/evans/Desktop"
+        class="{{ item.types[0].type.name }}"
       >
         <g id="canvas" transform="matrix(1 0 0 -1 105.6 105.6)">
-          <path *ngIf="item.types.length > 1" class="{{ item.types[1].type.name }}"
+          <path
+            *ngIf="item.types.length > 1"
+            class="{{ item.types[1].type.name }}"
             id="path7"
-            style="filter:blur(4px)"
+            style="filter: blur(4px)"
             d="m0 100l50-186.6-136.6 136.6 186.6-50-186.6-50 136.6 136.6-50-186.6-50 186.6 136.6-136.6-186.6 50 186.6 50-136.6-136.6 50 186.6z"
           />
-                    <path *ngIf="item.types.length == 1" class="{{ item.types[0].type.name }}"
+          <path
+            *ngIf="item.types.length == 1"
+            class="{{ item.types[0].type.name }}"
             id="path7"
-            style="filter:blur(10px)"
+            style="filter: blur(10px)"
             d="m0 100l50-186.6-136.6 136.6 186.6-50-186.6-50 136.6 136.6-50-186.6-50 186.6 136.6-136.6-186.6 50 186.6 50-136.6-136.6 50 186.6z"
           />
-
         </g>
       </svg>
-      <img
-        class="default"
-        src="{{ item.sprites.front_default }}"
-        alt="{{ item.name }}"
-      />
+      <div class="default">
+        <img
+          *ngIf="item.sprites.front_default != null"
+          src="{{ item.sprites.front_default }}"
+        />
+        <img
+          *ngIf="item.sprites.front_default == null"
+          src="{{ item.sprites.other.home.front_default }}"
+        />
+        <img
+          *ngIf="
+            item.sprites.front_default == null &&
+            item.sprites.other.home.front_default == null
+          "
+          src="{{ item.sprites.other['official-artwork'].front_default }}"
+        />
+
+        <img
+          *ngIf="item.id == 10181"
+          src="{{
+            item.sprites.versions['generation-vii']['ultra-sun-ultra-moon']
+              .front_default
+          }}"
+        />
+
+        <img
+          *ngIf="item.id == 10158 || item.id == 10159"
+          src="{{
+            item.sprites.versions['generation-viii'].icons.front_default
+          }}"
+        />
+      </div>
+
+      <h5>{{ item.name }}</h5>
+      <h5>{{ item.id }}</h5>
+      <p>
+        <span>{{ item.types[0].type.name }}</span>
+        <span *ngIf="item.types.length > 1">
+          / {{ item.types[1].type.name }}</span
+        >
+      </p>
     </div>
-    <h5>{{ item.name }}</h5>
-    <h5>{{ item.id }}</h5>
-    <p>
-      <span>{{ item.types[0].type.name }}</span>
-      <span *ngIf="item.types.length > 1">
-        / {{ item.types[1].type.name }}</span
-      >
-    </p>
   </div>
 </div>
 <pagination-controls
