@@ -1,51 +1,45 @@
+<div class="search-bar">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search Here"
+    name="term"
+    [(ngModel)]="term"
+
+  />
+</div>
+
 <div class="card-grid">
   <div
     class="box"
     *ngFor="
-      let item of pokemon
+      let item of pokemon | filter: term
         | paginate
           : { itemsPerPage: limit, currentPage: page, totalItems: totalNumber }
     "
   >
     <div class="default">
       <svg
-        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-        xmlns:cc="http://web.resource.org/cc/"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:svg="http://www.w3.org/2000/svg"
-        xmlns:ns1="http://sozi.baierouge.fr"
-        id="svg2"
-        sodipodi:docname="playful_geometer_Star_Polygon.svg"
-        sodipodi:modified="true"
-        viewBox="0 0 212.65 214.1"
-        xlink:xlink="xlink"
-        sodipodi:version="0.32"
-        version="1.0"
-        inkscape:output_extension="org.inkscape.output.svg.inkscape"
-        inkscape:version="0.45"
-        sodipodi:docbase="/home/evans/Desktop"
         class="{{ item.types[0].type.name }}"
+        viewBox="0 0 500 500"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="canvas" transform="matrix(1 0 0 -1 105.6 105.6)">
-          <path
-            *ngIf="item.types.length > 1"
-            class="{{ item.types[1].type.name }}"
-            id="path7"
-            style="filter: blur(4px)"
-            d="m0 100l50-186.6-136.6 136.6 186.6-50-186.6-50 136.6 136.6-50-186.6-50 186.6 136.6-136.6-186.6 50 186.6 50-136.6-136.6 50 186.6z"
-          />
-          <path
-            *ngIf="item.types.length == 1"
-            class="{{ item.types[0].type.name }}"
-            id="path7"
-            style="filter: blur(10px)"
-            d="m0 100l50-186.6-136.6 136.6 186.6-50-186.6-50 136.6 136.6-50-186.6-50 186.6 136.6-136.6-186.6 50 186.6 50-136.6-136.6 50 186.6z"
-          />
-        </g>
+        <ellipse
+          *ngIf="item.types.length > 1"
+          class="{{ item.types[1].type.name }}"
+          cx="250"
+          cy="250"
+          rx="200"
+          ry="200"
+        />
+        <ellipse
+          *ngIf="item.types.length == 1"
+          class="{{ item.types[0].type.name }}"
+          cx="250"
+          cy="250"
+          rx="200"
+          ry="200"
+        />
       </svg>
       <div class="default">
         <img
@@ -80,9 +74,9 @@
         />
       </div>
 
-      <h5>{{ item.name }}</h5>
-      <h5>{{ item.id }}</h5>
-      <p>
+      <h5 class="poke-name">{{ item.name }}</h5>
+      <p class="poke-id">{{ item.id }}</p>
+      <p class="poke-types">
         <span>{{ item.types[0].type.name }}</span>
         <span *ngIf="item.types.length > 1">
           / {{ item.types[1].type.name }}</span

@@ -13,8 +13,8 @@
   background-color: #eb1c1c;
   color: #ffff;
   z-index: 1000;
-  width: 100%;
-  min-width: 150px;
+    width: min(100% - 2rem, 80%);
+  margin-inline: auto;
   text-shadow: 2px 2px black;
 
 }

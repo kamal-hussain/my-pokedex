@@ -8,6 +8,8 @@ import { PokeNavComponent } from './components/poke-nav/poke-nav.component';
 import { DexGridComponent } from './components/dex-grid/dex-grid.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PokeApiService } from './services/poke-api.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, PokeNavComponent, DexGridComponent],
@@ -16,6 +18,8 @@ import { PokeApiService } from './services/poke-api.service';
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ],
   providers: [PokeApiService],
   bootstrap: [AppComponent],
