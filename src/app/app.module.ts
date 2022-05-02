@@ -10,9 +10,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PokeApiService } from './services/poke-api.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { CardComponent } from './components/card/card.component';
+import { SpriteComponent } from './components/sprite/sprite.component';
 
 @NgModule({
-  declarations: [AppComponent, PokeNavComponent, DexGridComponent],
+  declarations: [
+    AppComponent,
+    PokeNavComponent,
+    DexGridComponent,
+    CardComponent,
+    SpriteComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

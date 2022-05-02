@@ -10,12 +10,11 @@ export class PokeApiService {
   constructor(private http: HttpClient) {}
   url = 'https://pokeapi.co/api/v2/pokemon';
 
-  getData(limit: number, offset: number): Observable<any> {
-    console.log(this.url + '?limit=' + limit + '&offset=' + offset);
+  getPokemon(limit: number, offset: number): Observable<any> {
     return this.http.get(this.url + '?limit=' + limit + '&offset=' + offset);
   }
 
-  getMoreData(name: string) {
+  getPokemonDetails(name: string) {
     return this.http.get(this.url + '/' + name);
   }
 }

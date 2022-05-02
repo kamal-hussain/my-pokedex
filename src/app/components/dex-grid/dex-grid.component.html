@@ -5,87 +5,14 @@
     placeholder="Search Here"
     name="term"
     [(ngModel)]="term"
-
   />
 </div>
 
 <div class="card-grid">
-  <div
-    class="box"
-    *ngFor="
-      let item of pokemon | filter: term
-        | paginate
-          : { itemsPerPage: limit, currentPage: page, totalItems: totalNumber }
-    "
-  >
-    <div class="default">
-      <svg
-        class="{{ item.types[0].type.name }}"
-        viewBox="0 0 500 500"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <ellipse
-          *ngIf="item.types.length > 1"
-          class="{{ item.types[1].type.name }}"
-          cx="250"
-          cy="250"
-          rx="200"
-          ry="200"
-        />
-        <ellipse
-          *ngIf="item.types.length == 1"
-          class="{{ item.types[0].type.name }}"
-          cx="250"
-          cy="250"
-          rx="200"
-          ry="200"
-        />
-      </svg>
-      <div class="default">
-        <img
-          *ngIf="item.sprites.front_default != null"
-          src="{{ item.sprites.front_default }}"
-        />
-        <img
-          *ngIf="item.sprites.front_default == null"
-          src="{{ item.sprites.other.home.front_default }}"
-        />
-        <img
-          *ngIf="
-            item.sprites.front_default == null &&
-            item.sprites.other.home.front_default == null
-          "
-          src="{{ item.sprites.other['official-artwork'].front_default }}"
-        />
-
-        <img
-          *ngIf="item.id == 10181"
-          src="{{
-            item.sprites.versions['generation-vii']['ultra-sun-ultra-moon']
-              .front_default
-          }}"
-        />
-
-        <img
-          *ngIf="item.id == 10158 || item.id == 10159"
-          src="{{
-            item.sprites.versions['generation-viii'].icons.front_default
-          }}"
-        />
-      </div>
-
-      <h5 class="poke-name">{{ item.name }}</h5>
-      <p class="poke-id">{{ item.id }}</p>
-      <p class="poke-types">
-        <span>{{ item.types[0].type.name }}</span>
-        <span *ngIf="item.types.length > 1">
-          / {{ item.types[1].type.name }}</span
-        >
-      </p>
-    </div>
-  </div>
+  <app-card
+    *ngFor="let item of pokemon | filter: term | paginate: { itemsPerPage: limit, currentPage: page }"
+    [item]="item"
+  ></app-card>
 </div>
-<pagination-controls
-  class="poke-paginate"
-  (pageChange)="page = $event; pokemon = []; getData()"
-></pagination-controls>
+
+<pagination-controls class="poke-paginate" (pageChange)="pageChange($event);"></pagination-controls>
