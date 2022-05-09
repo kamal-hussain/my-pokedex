@@ -1,0 +1,55 @@
+.box {
+  max-width: 200px;
+  min-width: 200px;
+  height: auto;
+  margin-top: 5px;
+  padding: 5px;
+  border: solid 1px black;
+  border-radius: 5%;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #212a39;
+  color: #fff;
+  text-shadow: 2px 2px black;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 12px;
+
+  .poke-id {
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+  }
+
+  .poke-name {
+    font-size: 16px;
+  }
+
+  .default {
+    position: relative;
+    width: 100%;
+    svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+
+      ellipse {
+        fill: rgba(216, 216, 216, 0);
+        stroke-width: 20px;
+        filter: blur(22px);
+      }
+
+    }
+    img {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
