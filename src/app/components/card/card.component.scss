@@ -1,7 +1,9 @@
 .box {
   max-width: 200px;
   min-width: 200px;
+  min-height: 300px;
   height: auto;
+  position: relative;
   margin-top: 5px;
   padding: 5px;
   border: solid 1px black;
@@ -17,18 +19,37 @@
   text-align: center;
   font-size: 12px;
 
-  .poke-id {
-    font-size: 12px;
-    margin-bottom: 0.5rem;
-  }
+  // .info-box {
+  //   position: relative;
+  // max-height: 50px;
+  // max-width: 200px;
+  // margin: 5px;
+  // bottom: 0;
 
-  .poke-name {
-    font-size: 16px;
-  }
+  .poke-details {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    .poke-id {
+      font-size: 12px;
+    }
 
-  .default {
+    .poke-name {
+      font-size: 16px;
+      max-width: 200px;
+    }
+  }
+  // }
+
+  .inner-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     width: 100%;
+    height: 300px;
+    align-items: center;
     svg {
       position: absolute;
       left: 0;
@@ -41,11 +62,12 @@
         stroke-width: 20px;
         filter: blur(22px);
       }
-
     }
-    img {
+
+    app-sprite {
+      position: absolute;
       width: 100%;
-      margin: auto;
+      top: 0;
     }
   }
 

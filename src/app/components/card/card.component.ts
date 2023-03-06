@@ -4,22 +4,22 @@ import { PokeApiService } from 'src/app/services/poke-api.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() item!: any
-  details: any
-  displaySprite: any
+  @Input() item!: any;
+  details: any;
+  displaySprite: any;
+  type1: string = '';
+  type2: string = '';
 
-  constructor(private pokeApi: PokeApiService) { }
+  constructor(private pokeApi: PokeApiService) {}
 
   ngOnInit(): void {
-    this.pokeApi
-      .getPokemonDetails(this.item.name)
-      .subscribe((data: any) => {
-        this.details = data
-        this.calculateDisplaySprite()
-      });
+    this.pokeApi.getPokemonDetails(this.item.name).subscribe((data: any) => {
+      this.details = data;
+      this.calculateDisplaySprite()
+    });
   }
 
   calculateDisplaySprite() {
