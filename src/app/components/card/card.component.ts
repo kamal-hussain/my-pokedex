@@ -18,29 +18,49 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
     this.pokeApi.getPokemonDetails(this.item.name).subscribe((data: any) => {
       this.details = data;
-      this.calculateDisplaySprite()
+      this.calculateDisplaySprite();
     });
   }
 
   calculateDisplaySprite() {
-    if(this.details.sprites.front_default != null) {
-      this.displaySprite = this.details.sprites.front_default
+    const spriteFrontDefault = this.details.sprites.front_default;
+    const spriteHomeFront = this.details.sprites.other.home.front_default;
+    const spriteOfficialArt =
+      this.details.sprites.other['official-artwork'].front_default;
+    const spriteDreamWorld =
+      this.details.sprites.other['dream_world'].front_default;
+    if (spriteFrontDefault != null) {
+      this.displaySprite = spriteFrontDefault;
     }
 
-    if(this.details.sprites.front_default == null) {
-      this.displaySprite = this.details.sprites.other.home.front_default
+    if (spriteFrontDefault == null) {
+      this.displaySprite = spriteHomeFront;
     }
 
-    if(this.details.sprites.front_default != null && this.details.sprites.other.home.front_default == null) {
-      this.displaySprite = this.details.sprites.other['official-artwork'].front_default
+    if (spriteFrontDefault == null && spriteHomeFront == null) {
+      this.displaySprite = spriteOfficialArt;
     }
 
-    if(this.details.id == 10181) {
-      this.displaySprite = this.details.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default
+    if (
+      spriteFrontDefault == null &&
+      spriteHomeFront == null &&
+      spriteOfficialArt == null
+    ) {
+      this.displaySprite = spriteDreamWorld;
     }
 
-    if(this.details.id == 10158 || this.details.id == 10159) {
-      this.displaySprite = this.details.sprites.versions['generation-viii'].icons.front_default
-    }
+    // if(this.details.id == 10181) {
+    //   this.displaySprite = spriteOfficialArt;
+    // }
+
+    // if (
+    //   this.details.id == 10158 ||
+    //   this.details.id == 10159 ||
+    //   this.details.id == 10153 ||
+    //   this.details.id == 10154
+    // ) {
+    //   this.displaySprite = spriteOfficialArt;
+    // }
+
   }
 }

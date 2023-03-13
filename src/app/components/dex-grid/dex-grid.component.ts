@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokeApiService } from 'src/app/services/poke-api.service';
+
+
 @Component({
   selector: 'dex-grid',
   templateUrl: './dex-grid.component.html',
@@ -30,9 +32,4 @@ export class DexGridComponent implements OnInit {
     this.page = input;
   }
 
-  onKeydown(event: any) {
-    if (event.key === 'Enter') {
-      console.log(event);
-    }
-  }
 }
