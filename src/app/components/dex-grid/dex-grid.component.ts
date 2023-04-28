@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
-
 @Component({
   selector: 'dex-grid',
   templateUrl: './dex-grid.component.html',
@@ -31,5 +30,4 @@ export class DexGridComponent implements OnInit {
   pageChange(input: any) {
     this.page = input;
   }
-
 }

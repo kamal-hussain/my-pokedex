@@ -7,11 +7,9 @@ import { PokeApiService } from 'src/app/services/poke-api.service';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() item!: any;
+  @Input() item: any;
   details: any;
   displaySprite: any;
-  type1: string = '';
-  type2: string = '';
 
   constructor(private pokeApi: PokeApiService) {}
 
@@ -29,6 +27,7 @@ export class CardComponent implements OnInit {
       this.details.sprites.other['official-artwork'].front_default;
     const spriteDreamWorld =
       this.details.sprites.other['dream_world'].front_default;
+
     if (spriteFrontDefault != null) {
       this.displaySprite = spriteFrontDefault;
     }
@@ -48,19 +47,5 @@ export class CardComponent implements OnInit {
     ) {
       this.displaySprite = spriteDreamWorld;
     }
-
-    // if(this.details.id == 10181) {
-    //   this.displaySprite = spriteOfficialArt;
-    // }
-
-    // if (
-    //   this.details.id == 10158 ||
-    //   this.details.id == 10159 ||
-    //   this.details.id == 10153 ||
-    //   this.details.id == 10154
-    // ) {
-    //   this.displaySprite = spriteOfficialArt;
-    // }
-
   }
 }
