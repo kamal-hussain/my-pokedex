@@ -1,5 +1,5 @@
-<div class="box">
-  <div class="inner-box">
+<div class="card">
+  <div class="card-top">
     <svg
       class="{{ details?.types[0].type.name }}"
       viewBox="0 0 500 500"
@@ -23,16 +23,16 @@
       />
     </svg>
 
-    <app-sprite [sprite]="displaySprite"></app-sprite>
-    <div class="poke-details">
-      <h5 class="poke-name">{{ details?.name }}</h5>
-      <p class="poke-id">{{ details?.id }}</p>
-      <p class="poke-types">
-        <span>{{ details?.types[0].type.name }}</span>
-        <span *ngIf="details?.types.length === 2">
-          / {{ details?.types[1].type.name }}</span
-        >
-      </p>
-    </div>
+    <poke-sprite [sprite]="displaySprite"></poke-sprite>
+  </div>
+  <div class="card-bottom">
+    <h5 class="poke-name">{{ details?.name }}</h5>
+    <p class="poke-id">{{ details?.id }}</p>
+    <p class="poke-types">
+      <span>{{ details?.types[0].type.name }}</span>
+      <span *ngIf="details?.types.length === 2">
+        / {{ details?.types[1].type.name }}</span
+      >
+    </p>
   </div>
 </div>
