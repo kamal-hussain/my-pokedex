@@ -12,6 +12,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { CardComponent } from './components/card/card.component';
 import { SpriteComponent } from './components/sprite/sprite.component';
+import { DexCarouselComponent } from './components/dex-carousel/dex-carousel.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SpriteComponent } from './components/sprite/sprite.component';
     PokeNavComponent,
     DexGridComponent,
     CardComponent,
-    SpriteComponent
+    SpriteComponent,
+    DexCarouselComponent
   ],
   imports: [
     BrowserModule,

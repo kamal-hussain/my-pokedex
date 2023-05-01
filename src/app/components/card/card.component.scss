@@ -25,6 +25,11 @@
     cursor: pointer;
   }
 
+  &:target {
+    outline: 3px solid rgb(242, 255, 66);
+    scroll-margin-top: 4rem;
+  }
+
   // .info-box {
   //   position: relative;
   // max-height: 50px;
@@ -41,6 +46,7 @@
   width: 100%;
   height: 300px;
   align-items: center;
+
   svg {
     position: absolute;
     left: 0;

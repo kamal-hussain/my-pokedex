@@ -1,38 +1,40 @@
-<div class="card">
-  <div class="card-top">
-    <svg
-      class="{{ details?.types[0].type.name }}"
-      viewBox="0 0 500 500"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <ellipse
-        *ngIf="details?.types.length > 1"
-        class="{{ details.types[1].type.name }}"
-        cx="250"
-        cy="250"
-        rx="200"
-        ry="200"
-      />
-      <ellipse
-        *ngIf="details?.types.length == 1"
+<a href="#{{ details?.id }}">
+  <div id="{{ details?.id }}" class="card">
+    <div class="card-top">
+      <svg
         class="{{ details?.types[0].type.name }}"
-        cx="250"
-        cy="250"
-        rx="200"
-        ry="200"
-      />
-    </svg>
-
-    <poke-sprite [sprite]="displaySprite"></poke-sprite>
-  </div>
-  <div class="card-bottom">
-    <h5 class="poke-name">{{ details?.name }}</h5>
-    <p class="poke-id">{{ details?.id }}</p>
-    <p class="poke-types">
-      <span>{{ details?.types[0].type.name }}</span>
-      <span *ngIf="details?.types.length === 2">
-        / {{ details?.types[1].type.name }}</span
+        viewBox="0 0 500 500"
+        xmlns="http://www.w3.org/2000/svg"
       >
-    </p>
+        <ellipse
+          *ngIf="details?.types.length > 1"
+          class="{{ details.types[1].type.name }}"
+          cx="250"
+          cy="250"
+          rx="200"
+          ry="200"
+        />
+        <ellipse
+          *ngIf="details?.types.length == 1"
+          class="{{ details?.types[0].type.name }}"
+          cx="250"
+          cy="250"
+          rx="200"
+          ry="200"
+        />
+      </svg>
+
+      <poke-sprite [sprite]="displaySprite"></poke-sprite>
+    </div>
+    <div class="card-bottom">
+      <h5 class="poke-name">{{ details?.name }}</h5>
+      <p class="poke-id">{{ details?.id }}</p>
+      <p class="poke-types">
+        <span>{{ details?.types[0].type.name }}</span>
+        <span *ngIf="details?.types.length === 2">
+          / {{ details?.types[1].type.name }}</span
+        >
+      </p>
+    </div>
   </div>
-</div>
+</a>

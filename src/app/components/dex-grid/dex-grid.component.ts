@@ -11,7 +11,7 @@ export class DexGridComponent implements OnInit {
   pokemon: any = [];
   page: number = 1;
   totalNumber: any;
-  limit: number = 27;
+  limit: number = 50;
   term: any;
 
   constructor(private pokeApi: PokeApiService) {}
@@ -29,5 +29,7 @@ export class DexGridComponent implements OnInit {
 
   pageChange(input: any) {
     this.page = input;
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 }
