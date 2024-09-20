@@ -5,14 +5,22 @@
     placeholder="Search Here"
     name="term"
     [(ngModel)]="term"
->
+    (ngModelChange)="onSearchChange()"
+  />
 </div>
 
 <div class="card-grid">
   <app-card
-    *ngFor="let item of pokemon | filter: term | paginate: { itemsPerPage: limit, currentPage: page }"
+    *ngFor="
+      let item of pokemon
+        | filter : term
+        | paginate : { itemsPerPage: limit, currentPage: page }
+    "
     [item]="item"
   ></app-card>
 </div>
 
-<pagination-controls class="poke-paginate" (pageChange)="pageChange($event);"></pagination-controls>
+<pagination-controls
+  class="poke-paginate"
+  (pageChange)="pageChange($event)"
+></pagination-controls>

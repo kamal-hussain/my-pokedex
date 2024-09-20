@@ -32,4 +32,8 @@ export class DexGridComponent implements OnInit {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+
+  onSearchChange() {
+    this.page = 1;
+  }
 }
