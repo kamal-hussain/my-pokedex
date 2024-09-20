@@ -1,7 +1,27 @@
 <div class="modal" *ngIf="pokemon">
   <div class="modal-content">
-    <h2>{{ pokemon.name }}</h2>
-    <p class="poke-id">{{ pokemon?.url }}</p>
+    <div class="modal-title">
+      <h2>{{ pokemon.name }}</h2>
+      <p class="poke-id">{{ pokemon?.id }}</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-left">
+        <img
+          src="{{ pokemon.sprites.other.home.front_default }}"
+          alt="{{ pokemon.name }}"
+          class="modal-image"
+        />
+      </div>
+      <div class="modal-right">
+        <span>{{ pokemon?.types[0].type.name }}</span>
+        <span *ngIf="pokemon?.types.length === 2">
+          / {{ pokemon?.types[1].type.name }}</span
+        >
+        <div class="poke-flavor">
+          <p>{{ pokemonSpecies?.flavor_text_entries[91]?.flavor_text }}</p>
+        </div>
+      </div>
+    </div>
     <button (click)="closeModal()">Close</button>
   </div>
 </div>

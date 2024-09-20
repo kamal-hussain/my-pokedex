@@ -39,7 +39,9 @@ export class DexGridComponent implements OnInit {
   }
 
   openModal(pokemon: any) {
-    this.selectedPokemon = pokemon;
+    this.pokeApi.getPokemonDetails(pokemon.name).subscribe((details: any) => {
+      this.selectedPokemon = details;
+    });
   }
 
   closeModal() {

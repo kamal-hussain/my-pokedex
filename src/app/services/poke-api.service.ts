@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -16,5 +15,9 @@ export class PokeApiService {
 
   getPokemonDetails(name: string) {
     return this.http.get(this.url + '/' + name);
+  }
+
+  getPokemonSpeciesDetails(name: string) {
+    return this.http.get(this.url + '-species/' + name);
   }
 }
