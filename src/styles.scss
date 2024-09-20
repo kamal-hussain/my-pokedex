@@ -13,4 +13,8 @@ html {
 body {
   font-family: "Press Start 2P", cursive !important;
   background-color: rgb(108, 28, 28) !important;
+
+  &.modal-open {
+    overflow: hidden;
+  }
 }

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { CardComponent } from './components/card/card.component';
 import { SpriteComponent } from './components/sprite/sprite.component';
 import { DexCarouselComponent } from './components/dex-carousel/dex-carousel.component';
+import { PokemonModalComponent } from './components/pokemon-modal/pokemon-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DexCarouselComponent } from './components/dex-carousel/dex-carousel.com
     DexGridComponent,
     CardComponent,
     SpriteComponent,
-    DexCarouselComponent
+    DexCarouselComponent,
+    PokemonModalComponent
   ],
   imports: [
     BrowserModule,

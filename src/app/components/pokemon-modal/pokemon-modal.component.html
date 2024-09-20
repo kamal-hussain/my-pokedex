@@ -1,0 +1,7 @@
+<div class="modal" *ngIf="pokemon">
+  <div class="modal-content">
+    <h2>{{ pokemon.name }}</h2>
+    <p class="poke-id">{{ pokemon?.url }}</p>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>

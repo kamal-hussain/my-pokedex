@@ -13,6 +13,7 @@ export class DexGridComponent implements OnInit {
   totalNumber: any;
   limit: number = 50;
   term: any;
+  selectedPokemon: any = null;
 
   constructor(private pokeApi: PokeApiService) {}
 
@@ -35,5 +36,13 @@ export class DexGridComponent implements OnInit {
 
   onSearchChange() {
     this.page = 1;
+  }
+
+  openModal(pokemon: any) {
+    this.selectedPokemon = pokemon;
+  }
+
+  closeModal() {
+    this.selectedPokemon = null;
   }
 }

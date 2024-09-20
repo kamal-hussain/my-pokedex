@@ -17,8 +17,15 @@
         | paginate : { itemsPerPage: limit, currentPage: page }
     "
     [item]="item"
+    (click)="openModal(item)"
   ></app-card>
 </div>
+
+<app-pokemon-modal
+  [pokemon]="selectedPokemon"
+  *ngIf="selectedPokemon"
+  (close)="closeModal()"
+></app-pokemon-modal>
 
 <pagination-controls
   class="poke-paginate"
