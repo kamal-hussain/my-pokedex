@@ -1,27 +1,47 @@
 <div class="modal" *ngIf="pokemon">
   <div class="modal-content">
     <div class="modal-title">
-      <h2>{{ pokemon.name }}</h2>
+      <h2 class="poke-name">{{ pokemon?.name }}</h2>
       <p class="poke-id">{{ pokemon?.id }}</p>
     </div>
     <div class="modal-body">
       <div class="modal-left">
         <img
-          src="{{ pokemon.sprites.other.home.front_default }}"
-          alt="{{ pokemon.name }}"
+          [src]="pokemon?.sprites?.other?.home?.front_default || ''"
+          alt="{{ pokemon?.name }}"
           class="modal-image"
         />
       </div>
       <div class="modal-right">
-        <span>{{ pokemon?.types[0].type.name }}</span>
-        <span *ngIf="pokemon?.types.length === 2">
-          / {{ pokemon?.types[1].type.name }}</span
+        <span *ngIf="pokemon?.types && pokemon?.types.length > 0">{{
+          pokemon.types[0].type.name
+        }}</span>
+        <span *ngIf="pokemon?.types && pokemon?.types.length === 2">
+          / {{ pokemon.types[1].type.name }}</span
         >
         <div class="poke-flavor">
-          <p>{{ pokemonSpecies?.flavor_text_entries[91]?.flavor_text }}</p>
+          <p *ngFor="let entry of getSelectedFlavorTextEntries()">
+            {{ entry.flavor_text }}
+          </p>
         </div>
       </div>
     </div>
-    <button (click)="closeModal()">Close</button>
+    <div class="modal-footer">
+      <button
+        class="prev-btn"
+        (click)="previousPokemon()"
+        [disabled]="pokemon.id === 1"
+      >
+        Previous
+      </button>
+      <button class="close-btn" (click)="closeModal()">Close</button>
+      <button
+        class="next-btn"
+        (click)="nextPokemon()"
+        [disabled]="pokemon.id === 898"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </div>

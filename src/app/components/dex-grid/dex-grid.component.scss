@@ -1,6 +1,6 @@
 .search-bar {
   margin: 5px;
-  text-align:center !important;
+  text-align: center !important;
   width: min(100% - 2rem, 600px);
   margin-inline: auto;
 }
@@ -16,6 +16,8 @@
 }
 
 .poke-paginate ::ng-deep {
+  position: relative;
+  z-index: 1;
   margin-bottom: 0 !important;
   text-align: center;
   font-family: "Press Start 2P", cursive;
