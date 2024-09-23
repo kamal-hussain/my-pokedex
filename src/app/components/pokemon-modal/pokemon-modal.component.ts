@@ -20,10 +20,18 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
   @Output() next = new EventEmitter<void>();
   @Output() previous = new EventEmitter<void>();
 
+  lastPokemonId!: number;
+
+  private extractIdFromUrl(url: string): number {
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2], 10);
+  }
+
   constructor(private pokeApi: PokeApiService) {}
 
   ngOnInit() {
     this.getSpecies();
+    this.findLastPokemonId();
 
     document.body.classList.add('modal-open');
   }
@@ -32,12 +40,29 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
     document.body.classList.remove('modal-open');
   }
 
+  findLastPokemonId() {
+    this.pokeApi.getPokemon(20000, 0).subscribe((res: any) => {
+      const allPokemon = res.results;
+      let highestId = 0;
+
+      allPokemon.forEach((pokemon: any) => {
+        const id = this.extractIdFromUrl(pokemon.url);
+        if (id > highestId) {
+          highestId = id;
+        }
+      });
+
+      this.lastPokemonId = highestId;
+      console.log('Last Pokemon ID:', this.lastPokemonId);
+    });
+  }
+
   closeModal() {
     this.close.emit();
   }
 
   nextPokemon() {
-    if (this.pokemon.id < 898) {
+    if (this.pokemon.id < this.lastPokemonId) {
       this.pokeApi
         .getPokemonDetails((this.pokemon.id + 1).toString())
         .subscribe((details: any) => {
@@ -93,7 +118,7 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
       const similarEntry = uniqueEntries.find(
         (uniqueEntry) =>
           this.calculateSimilarity(entry.flavor_text, uniqueEntry.flavor_text) >
-          0.32
+          0.3
       );
 
       if (!similarEntry) {

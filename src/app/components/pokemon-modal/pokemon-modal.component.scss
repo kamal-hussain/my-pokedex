@@ -28,10 +28,29 @@
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 20px 20px 10px rgba(255, 255, 255, 0.1);
+    scrollbar-color: #6a2222 rgba(132, 24, 24, 0.3);
+
+    // &::-webkit-scrollbar {
+    //   width: 10px;
+    // }
+
+    // &::-webkit-scrollbar-track {
+    //   background: purple;
+    // }
+
+    // &::-webkit-scrollbar-thumb {
+    //   background-color: green;
+    //   border-radius: 6px;
+    //   border: 2px solid yellow;
+    // }
 
     h2 {
       margin-top: 0;
       text-transform: capitalize;
+    }
+
+    &::-webkit-scrollbar {
+      width: 12px;
     }
   }
 
@@ -102,6 +121,7 @@
       .poke-flavor {
         flex: 1;
         overflow-y: auto;
+        max-height: 55vh;
 
         p {
           text-align: left;
