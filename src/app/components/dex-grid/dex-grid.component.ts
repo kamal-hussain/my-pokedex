@@ -15,10 +15,13 @@ export class DexGridComponent implements OnInit {
   term: any;
   selectedPokemon: any = null;
 
+  filteredPokemon: any[] = [];
+
   constructor(private pokeApi: PokeApiService) {}
 
   ngOnInit() {
     this.getData();
+    this.updateFilteredPokemon();
   }
 
   getData() {
@@ -36,11 +39,24 @@ export class DexGridComponent implements OnInit {
 
   onSearchChange() {
     this.page = 1;
+    this.updateFilteredPokemon();
+  }
+
+  updateFilteredPokemon() {
+    if (this.term) {
+      this.filteredPokemon = this.pokemon.filter((item: any) =>
+        item.name.toLowerCase().includes(this.term.toLowerCase())
+      );
+    } else {
+      this.filteredPokemon = this.pokemon; // If no search term, show all Pokemon
+    }
+    console.log('Filtered Pokemon:', this.filteredPokemon);
   }
 
   openModal(pokemon: any) {
     this.pokeApi.getPokemonDetails(pokemon.name).subscribe((details: any) => {
       this.selectedPokemon = details;
+      this.updateFilteredPokemon();
     });
   }
 

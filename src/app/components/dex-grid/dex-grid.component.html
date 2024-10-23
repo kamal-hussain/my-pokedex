@@ -22,8 +22,9 @@
 </div>
 
 <app-pokemon-modal
-  [pokemon]="selectedPokemon"
   *ngIf="selectedPokemon"
+  [pokemon]="selectedPokemon"
+  [filteredPokemon]="filteredPokemon"
   (close)="closeModal()"
 ></app-pokemon-modal>
 

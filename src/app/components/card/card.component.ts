@@ -22,30 +22,25 @@ export class CardComponent implements OnInit {
 
   calculateDisplaySprite() {
     const spriteFrontDefault = this.details.sprites.front_default;
+    const spriteShowdown = this.details.sprites.other.showdown.front_default;
     const spriteHomeFront = this.details.sprites.other.home.front_default;
     const spriteOfficialArt =
       this.details.sprites.other['official-artwork'].front_default;
     const spriteDreamWorld =
       this.details.sprites.other['dream_world'].front_default;
 
-    if (spriteFrontDefault != null) {
-      this.displaySprite = spriteFrontDefault;
-    }
-
-    if (spriteFrontDefault == null) {
-      this.displaySprite = spriteHomeFront;
-    }
-
-    if (spriteFrontDefault == null && spriteHomeFront == null) {
-      this.displaySprite = spriteOfficialArt;
-    }
-
-    if (
-      spriteFrontDefault == null &&
-      spriteHomeFront == null &&
-      spriteOfficialArt == null
-    ) {
-      this.displaySprite = spriteDreamWorld;
+    switch (true) {
+      case spriteFrontDefault != null:
+        this.displaySprite = spriteFrontDefault;
+        break;
+      case spriteHomeFront != null:
+        this.displaySprite = spriteHomeFront;
+        break;
+      case spriteOfficialArt != null:
+        this.displaySprite = spriteOfficialArt;
+        break;
+      default:
+        this.displaySprite = spriteDreamWorld;
     }
   }
 }

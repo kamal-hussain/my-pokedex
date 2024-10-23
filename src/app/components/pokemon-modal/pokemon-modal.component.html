@@ -1,6 +1,7 @@
 <div class="modal" *ngIf="pokemon">
   <div class="modal-content">
     <div class="modal-title">
+      <button class="close-btn" (click)="closeModal()">X</button>
       <h2 class="poke-name">{{ pokemon?.name }}</h2>
       <p class="poke-id">{{ pokemon?.id }}</p>
     </div>
@@ -30,15 +31,14 @@
       <button
         class="prev-btn"
         (click)="previousPokemon()"
-        [disabled]="pokemon.id === 1"
+        [disabled]="currentIndex === 0"
       >
         Previous
       </button>
-      <button class="close-btn" (click)="closeModal()">Close</button>
       <button
         class="next-btn"
         (click)="nextPokemon()"
-        [disabled]="pokemon.id === 898"
+        [disabled]="currentIndex === filteredPokemon.length - 1"
       >
         Next
       </button>

@@ -55,21 +55,26 @@
   }
 
   .modal-title {
+    display: flex;
+    justify-content: space-between;
     position: relative;
     text-align: center;
     margin-bottom: 20px;
 
+    .poke-name {
+      margin: 0;
+      text-transform: capitalize;
+    }
+
+    .close-btn {
+      background-color: #e00202;
+    }
+
     .poke-id {
-      position: absolute;
       top: 0;
       right: 0;
       font-size: 1.2em;
       font-weight: bold;
-    }
-
-    .poke-name {
-      margin: 0;
-      text-transform: capitalize;
     }
   }
 
@@ -77,6 +82,7 @@
     display: flex;
     overflow: hidden;
     justify-content: space-between;
+    flex-direction: column;
 
     .modal-left,
     .modal-right {
@@ -86,7 +92,6 @@
 
     .modal-left {
       display: flex;
-      align-items: center;
       justify-content: center;
 
       .modal-image {
@@ -97,11 +102,8 @@
     }
 
     .modal-right {
-      width: 50%;
-      padding-left: 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       text-align: center;
 
       span {
@@ -141,12 +143,14 @@
       border-radius: 4px;
       cursor: pointer;
 
-      &:hover {
-        background-color: #0056b3;
+      &:disabled {
+        background-color: #cccccc;
+        color: #666666;
+        cursor: default;
       }
 
-      &.close-btn {
-        background-color: #e00202;
+      &:hover:not(:disabled) {
+        background-color: #5a2ef9;
       }
     }
   }

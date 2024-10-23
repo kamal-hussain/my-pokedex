@@ -15,12 +15,14 @@ import { PokeApiService } from 'src/app/services/poke-api.service';
 })
 export class PokemonModalComponent implements OnInit, OnDestroy {
   @Input() pokemon: any;
+  @Input() filteredPokemon: any[] = [];
   @Input() pokemonSpecies: any;
   @Output() close = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
   @Output() previous = new EventEmitter<void>();
 
   lastPokemonId!: number;
+  currentIndex: number = 0;
 
   private extractIdFromUrl(url: string): number {
     const parts = url.split('/');
@@ -34,6 +36,12 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
     this.findLastPokemonId();
 
     document.body.classList.add('modal-open');
+
+    this.currentIndex = this.filteredPokemon.findIndex(
+      (p) => p.name === this.pokemon.name
+    );
+
+    console.log('Current Index:', this.currentIndex);
   }
 
   ngOnDestroy() {
@@ -62,26 +70,28 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
   }
 
   nextPokemon() {
-    if (this.pokemon.id < this.lastPokemonId) {
-      this.pokeApi
-        .getPokemonDetails((this.pokemon.id + 1).toString())
-        .subscribe((details: any) => {
-          this.pokemon = details;
-          this.getSpecies();
-        });
+    console.log('Next button clicked');
+    if (this.currentIndex < this.filteredPokemon.length - 1) {
+      this.currentIndex++;
+      this.loadPokemon(this.filteredPokemon[this.currentIndex].name);
     }
   }
 
   previousPokemon() {
-    if (this.pokemon.id > 1) {
-      this.pokeApi
-        .getPokemonDetails((this.pokemon.id - 1).toString())
-        .subscribe((details: any) => {
-          this.pokemon = details;
-          this.getSpecies();
-        });
+    console.log('Previous button clicked');
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.loadPokemon(this.filteredPokemon[this.currentIndex].name);
     }
   }
+
+  loadPokemon(name: string) {
+    this.pokeApi.getPokemonDetails(name).subscribe((details: any) => {
+      this.pokemon = details;
+      this.getSpecies();
+    });
+  }
+
   getSpecies() {
     const baseName = this.pokemon.name.split('-')[0];
     this.pokeApi.getPokemonSpeciesDetails(baseName).subscribe(
