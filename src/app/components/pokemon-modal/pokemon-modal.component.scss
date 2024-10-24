@@ -67,7 +67,8 @@
     }
 
     .close-btn {
-      background-color: #e00202;
+      background-color: #900000;
+      color: #fff;
     }
 
     .poke-id {
@@ -84,10 +85,19 @@
     justify-content: space-between;
     flex-direction: column;
 
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+    }
+
     .modal-left,
     .modal-right {
       height: 100%;
-      overflow: hidden; // Hide overflow in both columns
+      overflow: hidden;
+
+      @media screen and (min-width: 768px) {
+        flex: 1;
+        width: 50%;
+      }
     }
 
     .modal-left {
@@ -113,11 +123,6 @@
 
       p {
         margin-top: 8px;
-      }
-
-      .poke-type {
-        font-size: 1.1em;
-        margin-bottom: 10px;
       }
 
       .poke-flavor {

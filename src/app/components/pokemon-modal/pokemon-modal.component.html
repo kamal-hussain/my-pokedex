@@ -14,12 +14,10 @@
         />
       </div>
       <div class="modal-right">
-        <span *ngIf="pokemon?.types && pokemon?.types.length > 0">{{
-          pokemon.types[0].type.name
-        }}</span>
-        <span *ngIf="pokemon?.types && pokemon?.types.length === 2">
-          / {{ pokemon.types[1].type.name }}</span
-        >
+        <button (click)="playCry()">Play Cry</button>
+        <audio #cryPlayer>
+          <source [src]="pokemon.cries.latest" type="audio/ogg" />
+        </audio>
         <div class="poke-flavor">
           <p *ngFor="let entry of getSelectedFlavorTextEntries()">
             {{ entry.flavor_text }}

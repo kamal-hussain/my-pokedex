@@ -5,6 +5,10 @@ import {
   EventEmitter,
   OnInit,
   OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  HostListener,
 } from '@angular/core';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
@@ -13,10 +17,11 @@ import { PokeApiService } from 'src/app/services/poke-api.service';
   templateUrl: './pokemon-modal.component.html',
   styleUrls: ['./pokemon-modal.component.scss'],
 })
-export class PokemonModalComponent implements OnInit, OnDestroy {
+export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() pokemon: any;
   @Input() filteredPokemon: any[] = [];
   @Input() pokemonSpecies: any;
+  @Input() cryUrl: string = '';
   @Output() close = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
   @Output() previous = new EventEmitter<void>();
@@ -24,12 +29,29 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
   lastPokemonId!: number;
   currentIndex: number = 0;
 
+  audioElement: HTMLAudioElement | null = null;
+
   private extractIdFromUrl(url: string): number {
     const parts = url.split('/');
     return parseInt(parts[parts.length - 2], 10);
   }
 
   constructor(private pokeApi: PokeApiService) {}
+
+  @ViewChild('cryPlayer') cryPlayer!: ElementRef<HTMLAudioElement>;
+  @ViewChild('playButton') playButton!: ElementRef<HTMLButtonElement>;
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const modalContent = document.querySelector('.modal-content');
+    if (modalContent && !modalContent.contains(event.target as Node)) {
+      this.closeModal();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.updateAudio();
+  }
 
   ngOnInit() {
     this.getSpecies();
@@ -41,7 +63,7 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
       (p) => p.name === this.pokemon.name
     );
 
-    console.log('Current Index:', this.currentIndex);
+    this.updateAudio();
   }
 
   ngOnDestroy() {
@@ -61,7 +83,6 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
       });
 
       this.lastPokemonId = highestId;
-      console.log('Last Pokemon ID:', this.lastPokemonId);
     });
   }
 
@@ -69,8 +90,12 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
     this.close.emit();
   }
 
+  playCry() {
+    const audioElement = this.cryPlayer.nativeElement;
+    audioElement.play();
+  }
+
   nextPokemon() {
-    console.log('Next button clicked');
     if (this.currentIndex < this.filteredPokemon.length - 1) {
       this.currentIndex++;
       this.loadPokemon(this.filteredPokemon[this.currentIndex].name);
@@ -78,7 +103,6 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
   }
 
   previousPokemon() {
-    console.log('Previous button clicked');
     if (this.currentIndex > 0) {
       this.currentIndex--;
       this.loadPokemon(this.filteredPokemon[this.currentIndex].name);
@@ -87,9 +111,25 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
 
   loadPokemon(name: string) {
     this.pokeApi.getPokemonDetails(name).subscribe((details: any) => {
-      this.pokemon = details;
+      this.pokemon = { ...this.pokemon, ...details };
       this.getSpecies();
+      this.updateAudio();
+      this.playCry();
     });
+  }
+
+  updateAudio() {
+    if (this.cryPlayer && this.pokemon?.cries?.latest) {
+      const audioElement = this.cryPlayer.nativeElement;
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      audioElement.load();
+      audioElement.oncanplaythrough = () => {
+        audioElement.play().catch((error) => {
+          console.error('Error playing audio:', error);
+        });
+      };
+    }
   }
 
   getSpecies() {
@@ -97,7 +137,6 @@ export class PokemonModalComponent implements OnInit, OnDestroy {
     this.pokeApi.getPokemonSpeciesDetails(baseName).subscribe(
       (details: any) => {
         this.pokemonSpecies = details;
-        console.log(this.pokemon.id);
       },
       (error) => {
         console.error('Error fetching species details:', error);
