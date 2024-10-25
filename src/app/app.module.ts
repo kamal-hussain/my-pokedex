@@ -33,7 +33,6 @@ import { SearchPipe } from './pipes/search.pipe';
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
-    SearchPipe,
   ],
   providers: [PokeApiService],
   bootstrap: [AppComponent],
