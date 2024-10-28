@@ -28,6 +28,7 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   lastPokemonId!: number;
   currentIndex: number = 0;
+  isPlaying: boolean = false;
 
   audioElement: HTMLAudioElement | null = null;
 
@@ -51,6 +52,7 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.updateAudio();
+    this.isPlaying = true;
   }
 
   ngOnInit() {
@@ -92,7 +94,12 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   playCry() {
     const audioElement = this.cryPlayer.nativeElement;
+    this.isPlaying = true;
     audioElement.play();
+
+    audioElement.onended = () => {
+      this.isPlaying = false;
+    };
   }
 
   nextPokemon() {
@@ -128,6 +135,10 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
         audioElement.play().catch((error) => {
           console.error('Error playing audio:', error);
         });
+      };
+
+      audioElement.onended = () => {
+        this.isPlaying = false;
       };
     }
   }

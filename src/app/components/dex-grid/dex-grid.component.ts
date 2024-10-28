@@ -11,7 +11,7 @@ export class DexGridComponent implements OnInit {
   pokemon: any = [];
   page: number = 1;
   totalNumber: any;
-  limit: number = 50;
+  limit: number = 105;
   term: any;
   selectedPokemon: any = null;
 

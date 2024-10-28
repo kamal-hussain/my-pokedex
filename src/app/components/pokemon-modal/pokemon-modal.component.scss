@@ -56,27 +56,26 @@
 
   .modal-title {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: relative;
     text-align: center;
-    margin-bottom: 20px;
+  }
 
-    .poke-name {
-      margin: 0;
-      text-transform: capitalize;
-    }
+  .poke-name {
+    margin: 0;
+    text-transform: capitalize;
+  }
 
-    .close-btn {
-      background-color: #900000;
-      color: #fff;
-    }
+  .close-btn {
+    background-color: #900000;
+    color: #fff;
+  }
 
-    .poke-id {
-      top: 0;
-      right: 0;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
+  .poke-id {
+    top: 0;
+    right: 0;
+    font-size: 1.2em;
+    font-weight: bold;
   }
 
   .modal-body {
@@ -84,6 +83,7 @@
     overflow: hidden;
     justify-content: space-between;
     flex-direction: column;
+    padding: 0;
 
     @media screen and (min-width: 768px) {
       flex-direction: row;
@@ -102,7 +102,9 @@
 
     .modal-left {
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
 
       .modal-image {
         max-width: 100%;
@@ -158,5 +160,70 @@
         background-color: #5a2ef9;
       }
     }
+  }
+}
+
+.play-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.play-cry-btn {
+  background: none;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .play-icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 2px;
+  }
+}
+
+.audio-wave {
+  &.playing {
+    display: flex;
+    gap: 8px;
+    width: 75%;
+    align-items: center;
+    height: 40px;
+
+    span {
+      width: 2px;
+      height: 100%;
+      background: #fff;
+      animation: wave 0.8s ease-in-out infinite;
+
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.1s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
   }
 }
