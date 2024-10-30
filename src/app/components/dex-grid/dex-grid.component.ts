@@ -50,7 +50,6 @@ export class DexGridComponent implements OnInit {
     } else {
       this.filteredPokemon = this.pokemon; // If no search term, show all Pokemon
     }
-    console.log('Filtered Pokemon:', this.filteredPokemon);
   }
 
   openModal(pokemon: any) {

@@ -140,7 +140,9 @@
   }
 
   .modal-footer {
-    border-top: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     button {
       margin-top: 20px;
       padding: 10px 20px;
@@ -149,6 +151,14 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+
+      &.more-details-btn {
+        background-color: #28a745;
+
+        &:hover {
+          background-color: #218838;
+        }
+      }
 
       &:disabled {
         background-color: #cccccc;
