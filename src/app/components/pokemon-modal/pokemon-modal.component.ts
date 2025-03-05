@@ -11,6 +11,7 @@ import {
   HostListener,
   NgZone,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
 @Component({
@@ -38,7 +39,11 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
     return parseInt(parts[parts.length - 2], 10);
   }
 
-  constructor(private pokeApi: PokeApiService, private ngZone: NgZone) {}
+  constructor(
+    private pokeApi: PokeApiService,
+    private ngZone: NgZone,
+    private router: Router
+  ) {}
 
   @ViewChild('cryPlayer') cryPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('playButton') playButton!: ElementRef<HTMLButtonElement>;
@@ -121,7 +126,8 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   showMoreDetails() {
     const baseName = this.pokemon.species.name;
-    window.open(`https://pokemondb.net/pokedex/${baseName}`, '_blank');
+    this.router.navigate(['/pokemon', baseName]);
+    this.closeModal();
   }
 
   loadPokemon(name: string) {

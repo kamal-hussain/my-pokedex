@@ -28,11 +28,13 @@ export class DexGridComponent implements OnInit {
     this.pokeApi.getPokemon(999999, 0).subscribe((res) => {
       this.totalNumber = res.count;
       this.pokemon = res.results;
+      this.updateFilteredPokemon();
     });
   }
 
   pageChange(input: any) {
     this.page = input;
+    this.updateFilteredPokemon();
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
