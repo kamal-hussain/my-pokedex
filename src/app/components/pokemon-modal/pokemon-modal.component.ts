@@ -9,6 +9,7 @@ import {
   ElementRef,
   AfterViewInit,
   HostListener,
+  NgZone,
 } from '@angular/core';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
@@ -28,6 +29,7 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   lastPokemonId!: number;
   currentIndex: number = 0;
+  isPlaying: boolean = false;
 
   audioElement: HTMLAudioElement | null = null;
 
@@ -36,7 +38,7 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
     return parseInt(parts[parts.length - 2], 10);
   }
 
-  constructor(private pokeApi: PokeApiService) {}
+  constructor(private pokeApi: PokeApiService, private ngZone: NgZone) {}
 
   @ViewChild('cryPlayer') cryPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('playButton') playButton!: ElementRef<HTMLButtonElement>;
@@ -50,7 +52,10 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.updateAudio();
+    setTimeout(() => {
+      this.updateAudio();
+      this.isPlaying = true;
+    });
   }
 
   ngOnInit() {
@@ -92,7 +97,12 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   playCry() {
     const audioElement = this.cryPlayer.nativeElement;
+    this.isPlaying = true;
     audioElement.play();
+
+    audioElement.onended = () => {
+      this.isPlaying = false;
+    };
   }
 
   nextPokemon() {
@@ -107,6 +117,11 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
       this.currentIndex--;
       this.loadPokemon(this.filteredPokemon[this.currentIndex].name);
     }
+  }
+
+  showMoreDetails() {
+    const baseName = this.pokemon.species.name;
+    window.open(`https://pokemondb.net/pokedex/${baseName}`, '_blank');
   }
 
   loadPokemon(name: string) {
@@ -124,16 +139,27 @@ export class PokemonModalComponent implements OnInit, OnDestroy, AfterViewInit {
       audioElement.pause();
       audioElement.currentTime = 0;
       audioElement.load();
-      audioElement.oncanplaythrough = () => {
-        audioElement.play().catch((error) => {
-          console.error('Error playing audio:', error);
-        });
-      };
+
+      // Wrap the play logic in setTimeout
+      setTimeout(() => {
+        audioElement.oncanplaythrough = () => {
+          audioElement.play().catch((error) => {
+            console.error('Error playing audio:', error);
+          });
+        };
+
+        audioElement.onended = () => {
+          // Use zone.js to ensure change detection
+          this.ngZone.run(() => {
+            this.isPlaying = false;
+          });
+        };
+      });
     }
   }
 
   getSpecies() {
-    const baseName = this.pokemon.name.split('-')[0];
+    const baseName = this.pokemon.species.name;
     this.pokeApi.getPokemonSpeciesDetails(baseName).subscribe(
       (details: any) => {
         this.pokemonSpecies = details;

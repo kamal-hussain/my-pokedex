@@ -11,7 +11,7 @@ export class DexGridComponent implements OnInit {
   pokemon: any = [];
   page: number = 1;
   totalNumber: any;
-  limit: number = 50;
+  limit: number = 105;
   term: any;
   selectedPokemon: any = null;
 
@@ -50,7 +50,6 @@ export class DexGridComponent implements OnInit {
     } else {
       this.filteredPokemon = this.pokemon; // If no search term, show all Pokemon
     }
-    console.log('Filtered Pokemon:', this.filteredPokemon);
   }
 
   openModal(pokemon: any) {

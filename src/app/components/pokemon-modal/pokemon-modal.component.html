@@ -1,12 +1,11 @@
 <div class="modal" *ngIf="pokemon">
   <div class="modal-content">
     <div class="modal-title">
-      <button class="close-btn" (click)="closeModal()">X</button>
-      <h2 class="poke-name">{{ pokemon?.name }}</h2>
       <p class="poke-id">{{ pokemon?.id }}</p>
     </div>
     <div class="modal-body">
       <div class="modal-left">
+        <h2 class="poke-name">{{ pokemon?.name }}</h2>
         <img
           [src]="pokemon?.sprites?.other?.home?.front_default || ''"
           alt="{{ pokemon?.name }}"
@@ -14,10 +13,22 @@
         />
       </div>
       <div class="modal-right">
-        <button (click)="playCry()">Play Cry</button>
-        <audio #cryPlayer>
-          <source [src]="pokemon.cries.latest" type="audio/ogg" />
-        </audio>
+        <div class="play-area">
+          <button class="play-cry-btn" (click)="playCry()" #playButton>
+            <div class="play-icon"></div>
+          </button>
+          <div class="audio-wave" [class.playing]="isPlaying">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <audio #cryPlayer>
+            <source [src]="pokemon.cries.latest" type="audio/ogg" />
+          </audio>
+        </div>
         <div class="poke-flavor">
           <p *ngFor="let entry of getSelectedFlavorTextEntries()">
             {{ entry.flavor_text }}
@@ -32,6 +43,9 @@
         [disabled]="currentIndex === 0"
       >
         Previous
+      </button>
+      <button class="more-details-btn" (click)="showMoreDetails()">
+        More Details
       </button>
       <button
         class="next-btn"
